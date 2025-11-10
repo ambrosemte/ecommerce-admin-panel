@@ -41,7 +41,7 @@
         </div>
 
         <div class="card-footer text-center small text-muted py-2">
-            &copy; {{ date('Y') }} Seller Panel
+            &copy; {{ date('Y') }} Admin Panel
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@ namespace App\Constants;
 
 class ApiEndpoints
 {
-    // const BASE_URL = "https://backend-ecommerce.mtedev.com.ng";
+    //const BASE_URL = "https://backend-ecommerce.mtedev.com.ng";
     const BASE_URL = "http://127.0.0.1:8000";
 
     // AUTH

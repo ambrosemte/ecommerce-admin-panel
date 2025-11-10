@@ -75,9 +75,9 @@
     </a>
 
     <!-- User Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('user/*')])
+    <div @class(["menu-item", "active" => request()->is('user') || request()->is('user/*')])
         onclick="toggleDropdown('userDropdown')">
-        <i class="las la-store menu-icon"></i>
+        <i class="las la-user menu-icon"></i>
         <span>User</span>
         <i class="las la-angle-down ms-auto"></i>
     </div>
@@ -97,7 +97,7 @@
     </div>
 
     <!-- Store Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('store/*')])
+    <div @class(["menu-item", "active" => request()->is('store') || request()->is('store/*')])
         onclick="toggleDropdown('storeDropdown')">
         <i class="las la-store menu-icon"></i>
         <span>Store</span>
@@ -113,9 +113,9 @@
     </div>
 
     <!-- Category Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('category/*')])
+    <div @class(["menu-item", "active" => request()->is('category') || request()->is('category/*')])
         onclick="toggleDropdown('categoryDropdown')">
-        <i class="las la-box menu-icon"></i>
+        <i class="las la-th-large menu-icon"></i>
         <span>Category</span>
         <i class="las la-angle-down ms-auto"></i>
     </div>
@@ -135,9 +135,9 @@
     </div>
 
     <!-- Specification Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('specification/*')])
+    <div @class(["menu-item", "active" => request()->is('specification') || request()->is('specification/*')])
         onclick="toggleDropdown('specificationDropdown')">
-        <i class="las la-shopping-bag menu-icon"></i>
+        <i class="las la-clipboard-list menu-icon"></i>
         <span>Specification</span>
         <i class="las la-angle-down ms-auto"></i>
     </div>
@@ -151,7 +151,8 @@
     </div>
 
     <!-- Orders Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('order/*')]) onclick="toggleDropdown('orderDropdown')">
+    <div @class(["menu-item", "active" => request()->is('order') || request()->is('order/*')])
+        onclick="toggleDropdown('orderDropdown')">
         <i class="las la-shopping-bag menu-icon"></i>
         <span>Order</span>
         <i class="las la-angle-down ms-auto"></i>
@@ -166,8 +167,9 @@
     </div>
 
     <!-- Chat Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('chat/*')]) onclick="toggleDropdown('chatDropdown')">
-        <i class="las la-shopping-bag menu-icon"></i>
+    <div @class(["menu-item", "active" => request()->is('chat') || request()->is('chat/*')])
+        onclick="toggleDropdown('chatDropdown')">
+        <i class="las la-comments menu-icon"></i>
         <span>Chat</span>
         <i class="las la-angle-down ms-auto"></i>
     </div>
@@ -175,7 +177,7 @@
         <a href="{{ route('chat') }}" class="text-decoration-none">
             <div class="menu-item">
                 <i class="las la-list-ul menu-icon"></i>
-                <span>Chats</span>
+                <span>All Chats</span>
             </div>
         </a>
     </div>

@@ -12,16 +12,31 @@
                 @php
                     $isCurrentUser = $msg['sender_role'] === 'admin' || $msg['sender_role'] === 'agent';
                 @endphp
-                <div class="d-flex mb-3 {{ $isCurrentUser ? 'justify-content-end' : 'justify-content-start' }}">
-                    <div class="p-2 rounded {{ $isCurrentUser ? 'bg-primary text-white' : 'bg-light' }}"
-                        style="max-width:70%;">
-                        <small class="text-muted">{{ $msg['sender']['name'] }}</small><br>
-                        {{ $msg['message'] }}
-                        <div class="text-end">
-                            <small class="text-muted">{{ \Carbon\Carbon::parse($msg['created_at'])->format('H:i') }}</small>
+                @if ($msg['is_user_message'])
+                    <div class="d-flex mb-3 {{ $isCurrentUser ? 'justify-content-end' : 'justify-content-start' }}">
+                        <div class="p-2 rounded {{ $isCurrentUser ? 'bg-primary text-white' : 'bg-light' }}"
+                            style="max-width:70%;">
+                            <small class="text-muted">{{ $msg['sender']['name'] }}</small><br>
+                            {{ $msg['message'] }}
+                            <div class="text-end">
+                                <small class="text-muted">{{ \Carbon\Carbon::parse($msg['created_at'])->format('H:i') }}</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    {{-- System message (agent joined the chat) --}}
+                    <div class="text-center my-3">
+                        <div class="d-inline-block px-3 py-2 bg-light rounded-pill">
+                            <div class="text-muted small fw-semibold">
+                                {{ $msg['message'] }}
+                            </div>
+                            <div class="text-muted" style="font-size: 11px;">
+                                {{ \Carbon\Carbon::parse($msg['created_at'])->format('H:i') }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             @endforeach
         </div>
 
@@ -37,35 +52,59 @@
     </div>
     <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
     <script>
-        document.addEventListener('livewire:load', function () {
-            const ably = new Ably.Realtime({ key: "{{ env('ABLY_KEY') }}" });
+        // Check which Livewire version you're using
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Script loaded');
+
+            const ably = new Ably.Realtime({
+                key: "{{ env('ABLY_KEY') }}",
+                log: { level: 4 } // Enable debugging
+            });
+
             const channel = ably.channels.get('conversation.{{ $id }}');
+
+            console.log('Ably initialized, channel:', 'conversation.{{ $id }}');
+
+            // Check connection status
+            ably.connection.on('connected', function () {
+                console.log('Ably connected successfully');
+            });
+
+            ably.connection.on('failed', function (stateChange) {
+                console.error('Ably connection failed:', stateChange);
+            });
 
             // Subscribe to new messages
             channel.subscribe('new-message', function (msg) {
-                alert(msg);
-                Livewire.emit('newMessageReceived', msg.data);
+                console.log('New message received:', msg.data);
+                window.Livewire.dispatch('newMessageReceived', { message: msg.data });
             });
 
-            // Optional: subscribe to agent events
+            // Agent events
             channel.subscribe('agent-joined', function (msg) {
-                Livewire.emit('agentJoined', msg.data);
-            });
-            channel.subscribe('agent-left', function (msg) {
-                Livewire.emit('agentLeft', msg.data);
+                console.log('Agent joined:', msg.data);
+                window.Livewire.dispatch('agentJoined', msg);
             });
 
-            // Optional: conversation closed
+            channel.subscribe('agent-left', function (msg) {
+                console.log('Agent left:', msg.data);
+                window.Livewire.dispatch('agentLeft', msg);
+            });
+
             channel.subscribe('conversation-closed', function (msg) {
-                Livewire.emit('conversationClosed', msg.data);
+                console.log('Conversation closed:', msg.data);
+                window.Livewire.dispatch('conversationClosed', msg);
             });
         });
 
         window.addEventListener('scrollToBottom', function () {
             const container = document.querySelector('.card-body');
-            if (container) {
+            if (!container) return;
+
+            // Wait until DOM updates
+            requestAnimationFrame(() => {
                 container.scrollTop = container.scrollHeight;
-            }
+            });
         });
     </script>
 </div>

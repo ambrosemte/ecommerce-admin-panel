@@ -17,7 +17,7 @@ class EditCategory extends Component
     public string $description = '';
     public string $imageUrl = '';
     public string $id = '';
-    public bool $status = false;
+    public int $status ;
     public $image;
     public array $category = [];
 
@@ -91,6 +91,7 @@ class EditCategory extends Component
             }
 
             noty()->success($responseData['message']);
+            return redirect()->route('category');
         } catch (\Exception $e) {
             Log::error('Edit Category Error: ' . $e->getMessage());
             noty()->error("An error occurred while editing category. Please try again.");

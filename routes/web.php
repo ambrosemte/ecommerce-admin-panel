@@ -13,7 +13,6 @@ use App\Livewire\Order\ListOrder;
 use App\Livewire\Order\ViewOrder;
 use App\Livewire\Specification\CreateSpecification;
 use App\Livewire\Specification\EditSpecification;
-use App\Livewire\Specification\ListSpecification;
 use App\Livewire\Store\ListStore;
 use App\Livewire\User\ListUser;
 use Illuminate\Support\Facades\Route;

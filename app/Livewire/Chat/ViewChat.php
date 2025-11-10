@@ -32,7 +32,6 @@ class ViewChat extends Component
 
     public function handleNewMessage($message)
     {
-        dd($message);
         $this->messages[] = $message;
         $this->dispatch('scrollToBottom');
     }
