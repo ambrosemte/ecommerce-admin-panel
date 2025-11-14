@@ -82,7 +82,7 @@ class ViewCategory extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "View Category"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.category.view-category');

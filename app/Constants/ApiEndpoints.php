@@ -8,7 +8,7 @@ class ApiEndpoints
     const BASE_URL = "http://127.0.0.1:8000";
 
     // AUTH
-    const LOGIN = "/api/v1/auth/seller/login";
+    const LOGIN = "/api/v1/auth/login";
     const LOGIN_VIA_GOOGLE = "/api/v1/auth/login-via-google";
     const REGISTER = "/api/v1/auth/register";
     const LOGOUT = "/api/v1/auth/logout";
@@ -56,5 +56,21 @@ class ApiEndpoints
     const TRANSFER_CONVERSATION = "/api/v1/chat/conversation";
     const VIEW_CHAT = "/api/v1/chat/messages";
     const SEND_MESSAGE = "/api/v1/chat/send";
+
+    //SHIPPING
+    const LIST_SHIPPING_METHODS = "/api/v1/shipping/method";
+    const CREATE_SHIPPING_METHOD = "/api/v1/shipping/method";
+    const EDIT_SHIPPING_METHOD = "/api/v1/shipping/method";
+    const LIST_SHIPPING_ZONES = "/api/v1/shipping/zone";
+    const CREATE_SHIPPING_ZONE = "/api/v1/shipping/zone";
+    const EDIT_SHIPPING_ZONE = "/api/v1/shipping/zone";
+    const LIST_SHIPPING_RATES = "/api/v1/shipping/rate";
+    const CREATE_SHIPPING_RATE = "/api/v1/shipping/rate";
+    const VIEW_SHIPPING_RATE = "/api/v1/shipping/rate";
+
+    //COUNTRY
+    const LIST_COUNTIRES = "/api/v1/csc/countries";
+    const LIST_STATES = "/api/v1/csc";
+    const LIST_CITIES = "/api/v1/csc";
 
 }

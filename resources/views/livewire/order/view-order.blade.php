@@ -1,5 +1,9 @@
-<div class="container mt-4">
-    <h3>Order Details</h3>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold mb-0">View Order</h3>
+    </div>
+
+    <h4 class="text-secondary mb-3">Order Details</h4>
     <div class="card mb-3">
         <div class="card-body">
             <p><strong>Order ID:</strong> {{ $order['id'] }}</p>
@@ -13,7 +17,39 @@
         </div>
     </div>
 
-    <h4>Order Statuses</h4>
+    <h4 class="text-secondary mb-3">Shipping Details</h4>
+    <div class="card mb-3">
+        <div class="card-body">
+            <p><strong>Shipping Method:</strong> {{ $order['shipping_method']['name'] ?? 'N/A' }}</p>
+            <p><strong>Shipping Rate:</strong> ₦{{ number_format($order['shipping_rate']['cost'] ?? 0, 2) }}</p>
+            {{-- Estimated Delivery --}}
+            @php
+                $daysMax = $order['shipping_rate']['days_max'] ?? null;
+                $createdAt = \Carbon\Carbon::parse($order['created_at']);
+                $estimatedDate = $daysMax
+                    ? $createdAt->copy()->addDays($daysMax)->format('d M, Y')
+                    : null;
+            @endphp
+
+            <p>
+                <strong>Estimated Delivery:</strong>
+                {{ $estimatedDate ?? 'Unavailable' }}
+            </p>
+        </div>
+    </div>
+
+    <h4 class="text-secondary mb-3">Delivery Details</h4>
+    <div class="card mb-3">
+        <div class="card-body">
+            <p><strong>Country:</strong> {{ $order['delivery_detail']['country'] ?? 'N/A' }}</p>
+            <p><strong>Sate:</strong> {{ $order['delivery_detail']['state'] ?? 'N/A' }}</p>
+            <p><strong>City:</strong> {{ $order['delivery_detail']['city'] ?? 'N/A' }}</p>
+            <p><strong>Address:</strong> {{ $order['delivery_detail']['street_address'] ?? 'N/A' }}</p>
+            <p><strong>Postcode:</strong> {{ $order['delivery_detail']['zip_code'] ?? 'N/A' }}</p>
+        </div>
+    </div>
+
+    <h4 class="text-secondary mb-3">Order Statuses</h4>
     <ul class="list-group mb-3">
         @foreach ($order['statuses'] as $status)
             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -28,7 +64,7 @@
         @endforeach
     </ul>
 
-    <h4>Latest Status</h4>
+    <h4 class="text-secondary mb-3">Latest Status</h4>
     <div class="alert alert-info">
         <strong>{{ $order['latest_status']['status'] ?? 'N/A' }}:</strong>
         {{ $order['latest_status']['description'] ?? '' }}

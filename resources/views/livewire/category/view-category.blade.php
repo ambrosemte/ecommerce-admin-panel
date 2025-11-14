@@ -1,4 +1,8 @@
 <div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold mb-0">View Category</h3>
+    </div>
+
     @if ($category)
         <div class="card shadow-sm mb-4">
             <div class="card-body">

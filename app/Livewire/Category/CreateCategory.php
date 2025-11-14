@@ -56,7 +56,7 @@ class CreateCategory extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "Create Category"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.category.create-category');

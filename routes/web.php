@@ -11,6 +11,13 @@ use App\Livewire\Chat\ViewChat;
 use App\Livewire\Dashboard;
 use App\Livewire\Order\ListOrder;
 use App\Livewire\Order\ViewOrder;
+use App\Livewire\Shipping\Method\CreateShippingMethod;
+use App\Livewire\Shipping\Method\ListShippingMethod;
+use App\Livewire\Shipping\Rate\CreateShippingRate;
+use App\Livewire\Shipping\Rate\ListShippingRate;
+use App\Livewire\Shipping\Rate\ViewShippingRate;
+use App\Livewire\Shipping\Zone\CreateShippingZone;
+use App\Livewire\Shipping\Zone\ListShippingZone;
 use App\Livewire\Specification\CreateSpecification;
 use App\Livewire\Specification\EditSpecification;
 use App\Livewire\Store\ListStore;
@@ -61,6 +68,25 @@ Route::group(['middleware' => CheckAuth::class], function () {
     Route::group(['prefix' => "specification"], function () {
         Route::get('create', CreateSpecification::class)->name('specification.create');
         Route::get('{id}/edit', EditSpecification::class)->name('specification.edit');
+    });
+
+    //shipping
+    Route::group(['prefix' => "shipping"], function () {
+        Route::prefix('method')->group(function () {
+            Route::get('/', ListShippingMethod::class)->name('shipping.method');
+            Route::get('create', CreateShippingMethod::class)->name('shipping.method.create');
+        });
+
+        Route::prefix('zone')->group(function () {
+            Route::get('/', ListShippingZone::class)->name('shipping.zone');
+            Route::get('create', CreateShippingZone::class)->name('shipping.zone.create');
+        });
+
+        Route::prefix('rate')->group(function () {
+            Route::get('/', ListShippingRate::class)->name('shipping.rate');
+            Route::get('create', CreateShippingRate::class)->name('shipping.rate.create');
+            Route::get('{shippingZoneId}', ViewShippingRate::class)->name('shipping.rate.view');
+        });
     });
 
     //chat

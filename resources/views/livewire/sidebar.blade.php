@@ -85,7 +85,7 @@
         <a href="{{ route('user') }}" class="text-decoration-none">
             <div class="menu-item">
                 <i class="las la-list-ul menu-icon"></i>
-                <span>List Users</span>
+                <span>Users List</span>
             </div>
         </a>
         <a href="{{ route('user') }}" class="text-decoration-none">
@@ -107,7 +107,7 @@
         <a href="{{ route('store') }}" class="text-decoration-none">
             <div class="menu-item">
                 <i class="las la-list-ul menu-icon"></i>
-                <span>List Stores</span>
+                <span>Stores List</span>
             </div>
         </a>
     </div>
@@ -123,7 +123,7 @@
         <a href="{{ route('category') }}" class="text-decoration-none">
             <div class="menu-item">
                 <i class="las la-list-ul menu-icon"></i>
-                <span>List Categories</span>
+                <span>Categories List</span>
             </div>
         </a>
         <a href="{{ route('category.create') }}" class="text-decoration-none">
@@ -161,7 +161,67 @@
         <a href="{{ route('order') }}" class="text-decoration-none">
             <div class="menu-item">
                 <i class="las la-list-ul menu-icon"></i>
-                <span>List Orders</span>
+                <span>Orders List</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Shiping Dropdown -->
+    <div @class(["menu-item", "active" => request()->is('shipping/method*')])
+        onclick="toggleDropdown('shippingMethodDropdown')">
+        <i class="las la-car menu-icon"></i>
+        <span>Shipping Methods</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="shippingMethodDropdown" class="dropdown">
+        <a href="{{ route('shipping.method') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-ul menu-icon"></i>
+                <span>Shipping Methods List</span>
+            </div>
+        </a>
+        <a href="{{ route('shipping.method.create') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-plus-circle menu-icon"></i>
+                <span>Create Shipping Method</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Shiping Zone -->
+    <div @class(["menu-item", "active" => request()->is('shipping/zone*')])
+        onclick="toggleDropdown('shippingZoneDropdown')">
+        <i class="las la-map-marker menu-icon"></i>
+        <span>Shipping Zones</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="shippingZoneDropdown" class="dropdown">
+        <a href="{{ route('shipping.zone') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-ul menu-icon"></i>
+                <span>Shipping Zones List</span>
+            </div>
+        </a>
+        <a href="{{ route('shipping.zone.create') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-plus-circle menu-icon"></i>
+                <span>Create Shipping Zone</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Shiping Rates -->
+    <div @class(["menu-item", "active" => request()->is('shipping/rate*')])
+        onclick="toggleDropdown('shippingRateDropdown')">
+        <i class="las la-dollar-sign menu-icon"></i>
+        <span>Shipping Rates</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="shippingRateDropdown" class="dropdown">
+        <a href="{{ route('shipping.rate') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-ul menu-icon"></i>
+                <span>Shipping Rates List</span>
             </div>
         </a>
     </div>

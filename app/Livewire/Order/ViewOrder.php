@@ -43,7 +43,7 @@ class ViewOrder extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "View Order"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.order.view-order');

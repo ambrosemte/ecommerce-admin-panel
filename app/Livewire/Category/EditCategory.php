@@ -98,7 +98,7 @@ class EditCategory extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "Edit Category"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.category.edit-category');

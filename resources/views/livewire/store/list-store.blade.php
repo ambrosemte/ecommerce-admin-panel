@@ -1,5 +1,9 @@
-<div class="container mt-4">
-    {{-- Summary Cards --}}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold mb-0">Stores List</h3>
+    </div>
+
+    <h4 class="text-secondary mb-3">Summary Stats</h4>
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card text-bg-primary text-center">
@@ -29,9 +33,7 @@
         </div>
     </div>
 
-    {{-- Stores Table --}}
-    <h4 class="mb-3">Stores List</h4>
-
+    <h4 class="text-secondary mb-3">Stores table</h4>
     <table class="table table-bordered table-hover table-striped align-middle">
         <thead class="table-dark">
             <tr>

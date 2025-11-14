@@ -98,7 +98,7 @@ class CreateSpecification extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "Create Specification"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.specification.create-specification');

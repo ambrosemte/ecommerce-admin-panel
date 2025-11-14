@@ -99,7 +99,7 @@ class EditSpecification extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "Edit Specifications"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.specification.edit-specification');

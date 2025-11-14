@@ -76,7 +76,7 @@ class ListChat extends Component
         return redirect()->route('chat.view', ['id' => $id]);
     }
 
-    #[Layout('components.layouts.app', ['title' => "All Conversations"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.chat.list-chat');

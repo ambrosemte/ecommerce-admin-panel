@@ -162,7 +162,7 @@ class ViewChat extends Component
         }
     }
 
-    #[Layout('components.layouts.app', ['title' => "View Chat"])]
+    #[Layout('components.layouts.app')]
     public function render()
     {
         return view('livewire.chat.view-chat');
