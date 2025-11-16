@@ -35,6 +35,14 @@ class ApiEndpoints
     const VIEW_ORDER = "/api/v1/order";
     const ACCEPT_ORDER = "/api/v1/order/accept";
     const DECLINE_ORDER = "/api/v1/order/decline";
+    const PROCESS_ORDER = "/api/v1/order/process";
+    const SHIP_ORDER = "/api/v1/order/ship";
+    const OUT_FOR_DELIVERY_ORDER = "/api/v1/order/out-for-delivery";
+    const DELIVERED_ORDER = "/api/v1/order/delivered";
+
+    const APPROVE_REFUND_ORDER = "/api/v1/order/approve-refund";
+    const DECLINE_REFUND_ORDER = "/api/v1/order/decline-refund";
+
 
     //CATEGORY
     const LIST_CATEGORIES = "/api/v1/category";

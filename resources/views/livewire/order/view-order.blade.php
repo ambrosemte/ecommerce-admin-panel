@@ -21,7 +21,7 @@
     <div class="card mb-3">
         <div class="card-body">
             <p><strong>Shipping Method:</strong> {{ $order['shipping_method']['name'] ?? 'N/A' }}</p>
-            <p><strong>Shipping Rate:</strong> ₦{{ number_format($order['shipping_rate']['cost'] ?? 0, 2) }}</p>
+            <p><strong>Shipping Cost:</strong> ₦{{ number_format($order['shipping_cost'] ?? 0, 2) }}</p>
             {{-- Estimated Delivery --}}
             @php
                 $daysMax = $order['shipping_rate']['days_max'] ?? null;
@@ -69,4 +69,50 @@
         <strong>{{ $order['latest_status']['status'] ?? 'N/A' }}:</strong>
         {{ $order['latest_status']['description'] ?? '' }}
     </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-3 flex-wrap">
+        <button class="btn btn-success" wire:click="handleOrderAction('process')" wire:loading.attr="disabled">
+            <span wire:loading.remove wire:target="handleOrderAction('process')">Process Order</span>
+            <span wire:loading wire:target="handleOrderAction('process')">
+                <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+            </span>
+        </button>
+        <button class="btn btn-info text-white" wire:click="handleOrderAction('ship')" wire:loading.attr="disabled">
+            <span wire:loading.remove wire:target="handleOrderAction('ship')">Mark as Shipped</span>
+            <span wire:loading wire:target="handleOrderAction('ship')">
+                <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+            </span>
+        </button>
+        <button class="btn btn-warning text-white" wire:click="handleOrderAction('out_for_delivery')"
+            wire:loading.attr="disabled">
+            <span wire:loading.remove wire:target="handleOrderAction('out_for_delivery')">Out for Delivery</span>
+            <span wire:loading wire:target="handleOrderAction('out_for_delivery')">
+                <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+            </span>
+        </button>
+        <button class="btn btn-primary" wire:click="handleOrderAction('delivered')" wire:loading.attr="disabled">
+            <span wire:loading.remove wire:target="handleOrderAction('delivered')">Mark as Delivered</span>
+            <span wire:loading wire:target="handleOrderAction('delivered')">
+                <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+            </span>
+        </button>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <span wire:loading.remove>More Actions</span>
+                <span wire:loading wire:target="handleOrderAction"
+                    x-show="$wire.currentAction == 'approve_refund' || $wire.currentAction == 'decline_refund'">
+                    <span class="spinner-border spinner-border-sm me-1"></span>
+                    Processing...
+                </span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" wire:click="handleOrderAction('approve_refund')" role="button">Accept
+                        Refund</a></li>
+                <li><a class="dropdown-item" wire:click="handleOrderAction('decline_refund')" role="button">Reject
+                        Refund</a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>

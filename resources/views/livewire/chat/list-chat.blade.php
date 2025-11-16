@@ -24,9 +24,22 @@
                     <div>
                         @if(!$conversation['is_completed'])
                             @if(!$conversation['agents'])
-                                <button wire:click="joinConversation('{{ $conversation['id'] }}')" class="btn btn-sm btn-primary">Join Conversation</button>
+                                <button class="btn btn-sm btn-primary" wire:click="joinConversation('{{ $conversation['id'] }}')"
+                                    wire:loading.attr="disabled">
+                                    <span wire:loading.remove wire:target="joinConversation('{{ $conversation['id'] }}')">Join
+                                        Conversation</span>
+                                    <span wire:loading wire:target="joinConversation('{{ $conversation['id'] }}')">
+                                        <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                                    </span>
+                                </button>
                             @else
-                                <button wire:click="open('{{ $conversation['id'] }}')" class="btn btn-sm btn-primary">Open</button>
+                                <button class="btn btn-sm btn-primary" wire:click="open('{{ $conversation['id'] }}')"
+                                    wire:loading.attr="disabled">
+                                    <span wire:loading.remove wire:target="open('{{ $conversation['id'] }}')">Open</span>
+                                    <span wire:loading wire:target="open('{{ $conversation['id'] }}')">
+                                        <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                                    </span>
+                                </button>
                             @endif
                         @endif
                     </div>

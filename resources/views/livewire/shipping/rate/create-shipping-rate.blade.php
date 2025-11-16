@@ -53,8 +53,8 @@
         </div>
 
         <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-            <span wire:loading.remove>Submit</span>
-            <span wire:loading>
+            <span wire:loading.remove wire:target="createShippingRate">Submit</span>
+            <span wire:loading wire:target="createShippingRate">
                 <span class="spinner-border spinner-border-sm me-1"></span> Processing...
             </span>
         </button>

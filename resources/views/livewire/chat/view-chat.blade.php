@@ -7,8 +7,19 @@
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <span>Chat</span>
             <div>
-                <button class="btn btn-sm btn-warning me-2" wire:click="transferConversation">Transfer</button>
-                <button class="btn btn-sm btn-secondary" wire:click="closeConversation">Close</button>
+                <button class="btn btn-sm btn-warning me-2" wire:click="transferConversation"
+                    wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="transferConversation">Transfer</span>
+                    <span wire:loading wire:target="transferConversation">
+                        <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                    </span>
+                </button>
+                <button class="btn btn-sm btn-secondary" wire:click="closeConversation" wire:loading.attr="disabled">
+                    <span wire:loading.remove wire:target="closeConversation">Close</span>
+                    <span wire:loading wire:target="closeConversation">
+                        <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                    </span>
+                </button>
             </div>
         </div>
         <div class="card-body" style="height:400px; overflow-y:auto;">
