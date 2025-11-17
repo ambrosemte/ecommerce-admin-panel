@@ -57,11 +57,20 @@
                     <td>{{ $zone['is_active'] ? '✅' : '❌' }}</td>
                     <td>
                         <button class="btn btn-primary" wire:click="viewShippingRate('{{ $zone['id'] }}')">
-                            <span>View Shipping Rates</span>
+                            <span wire:loading.remove wire:target="viewShippingRate('{{ $zone['id'] }}')">View Shipping
+                                Rates</span>
+                            <span wire:loading wire:target="viewShippingRate('{{ $zone['id'] }}')">
+                                <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                            </span>
                         </button>
                         <button class="btn btn-secondary"
                             wire:click="createShippingRate('{{ $zone['id'] }}', '{{ $zone['name'] }}')">
-                            <span>Create Shipping Rate</span>
+                            <span wire:loading.remove
+                                wire:target="createShippingRate('{{ $zone['id'] }}', '{{ $zone['name'] }}')">Create Shipping
+                                Rate</span>
+                            <span wire:loading wire:target="createShippingRate('{{ $zone['id'] }}', '{{ $zone['name'] }}')">
+                                <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                            </span>
                         </button>
                     </td>
                 </tr>

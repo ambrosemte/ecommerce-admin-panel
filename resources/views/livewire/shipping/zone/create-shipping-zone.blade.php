@@ -29,6 +29,11 @@
         <div class="mb-3 row">
             <div class="col">
                 <label for="state" class="form-label">State</label>
+                <div wire:loading wire:target="stateId" class="mt-2 d-flex align-items-center">
+                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="visually-hidden">Processing...</span>
+                    </div>
+                </div>
                 <select id="state" class="form-select" wire:model.live="stateId">
                     <option value="">-- Select State--</option>
                     @foreach ($states as $state)
@@ -41,6 +46,11 @@
             </div>
             <div class="col">
                 <label for="city" class="form-label">City</label>
+                <div wire:loading wire:target="cityId" class="mt-2 d-flex align-items-center">
+                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                        <span class="visually-hidden">Processing...</span>
+                    </div>
+                </div>
                 <select id="city" class="form-select" wire:model.live="cityId">
                     <option value="">-- Select City--</option>
                     @foreach ($cities as $city)
