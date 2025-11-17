@@ -46,6 +46,7 @@ class ListOrder extends Component
 
             $this->orders = $responseData['data']['data'];
             $this->links = $responseData['data']['links'];
+            $this->totalOrders=$responseData['data']['total'];
         } catch (\Exception $e) {
             Log::error('Fetch Order Error: ' . $e->getMessage());
             noty()->error("An error occurred while fetching orders. Please try again." . $e->getMessage());

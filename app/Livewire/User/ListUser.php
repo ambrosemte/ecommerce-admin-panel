@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class ListUser extends Component
 {
-    public int $totalUsers=0;
-    public int $activeUsers=0;
+    public int $totalUsers = 0;
+    public int $activeUsers = 0;
     public array $users = [];
     public array $links = [];
 
@@ -39,10 +39,11 @@ class ListUser extends Component
 
             $this->users = $responseData['data']['data'];
             $this->links = $responseData['data']['links'];
-
+            $this->totalUsers = $responseData['data']['total'];
+            $this->activeUsers=$responseData['data']['total'];
         } catch (\Exception $e) {
             Log::error('Fetch Store Error: ' . $e->getMessage());
-           noty()->error("An error occurred while fetching the stores. Please try again." . $e->getMessage());
+            noty()->error("An error occurred while fetching the stores. Please try again." . $e->getMessage());
         }
     }
 

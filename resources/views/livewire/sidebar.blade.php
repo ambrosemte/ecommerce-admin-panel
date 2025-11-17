@@ -166,6 +166,22 @@
         </a>
     </div>
 
+    <!-- Reviews Dropdown -->
+    <div @class(["menu-item", "active" => request()->is('review')])
+        onclick="toggleDropdown('reviewDropdown')">
+        <i class="las la-edit menu-icon"></i>
+        <span>Review</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="reviewDropdown" class="dropdown">
+        <a href="{{ route('review') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-ul menu-icon"></i>
+                <span>Reviews List</span>
+            </div>
+        </a>
+    </div>
+
     <!-- Shiping Dropdown -->
     <div @class(["menu-item", "active" => request()->is('shipping/method*')])
         onclick="toggleDropdown('shippingMethodDropdown')">

@@ -11,6 +11,7 @@ use App\Livewire\Chat\ViewChat;
 use App\Livewire\Dashboard;
 use App\Livewire\Order\ListOrder;
 use App\Livewire\Order\ViewOrder;
+use App\Livewire\Review\ListReview;
 use App\Livewire\Shipping\Method\CreateShippingMethod;
 use App\Livewire\Shipping\Method\ListShippingMethod;
 use App\Livewire\Shipping\Rate\CreateShippingRate;
@@ -92,6 +93,12 @@ Route::group(['middleware' => CheckAuth::class], function () {
     //chat
     Route::group(['prefix' => "chat"], function () {
         Route::get('/', ListChat::class)->name('chat');
+        Route::get('{id}', ViewChat::class)->name('chat.view');
+    });
+
+    //review
+    Route::group(['prefix' => "review"], function () {
+        Route::get('/', ListReview::class)->name('review');
         Route::get('{id}', ViewChat::class)->name('chat.view');
     });
 });

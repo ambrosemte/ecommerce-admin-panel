@@ -48,7 +48,6 @@ class ListCategory extends Component
             }
 
             $this->categories = $responseData['data'];
-
         } catch (\Exception $e) {
             Log::error('Fetch Category Error: ' . $e->getMessage());
             noty()->error("An error occurred while fetching categories. Please try again." . $e->getMessage());
@@ -63,7 +62,7 @@ class ListCategory extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->delete(ApiEndpoints::BASE_URL . ApiEndpoints::DELETE_CATEGORY ."/{$categoryId}/delete");
+            $response = Http::withHeaders($headers)->delete(ApiEndpoints::BASE_URL . ApiEndpoints::DELETE_CATEGORY . "/{$categoryId}/delete");
 
             $responseData = $response->json();
 
