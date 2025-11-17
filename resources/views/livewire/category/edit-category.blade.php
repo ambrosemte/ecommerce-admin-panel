@@ -51,10 +51,14 @@
         <div class="mb-3">
             @if ($image)
                 <img src="{{ $image->temporaryUrl() }}" class="w-24 h-24 rounded-lg shadow-md object-cover" width="150">
-            @else
-                <img src="{{ asset('images/default.png') }}" class="w-24 h-24 rounded-lg shadow-md object-cover"
-                    width="150">
             @endif
+
+            <div wire:loading wire:target="image" class="mt-2">
+                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                    <span class="visually-hidden">Uploading...</span>
+                </div>
+                <span class="ms-2 text-muted">Uploading image...</span>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">

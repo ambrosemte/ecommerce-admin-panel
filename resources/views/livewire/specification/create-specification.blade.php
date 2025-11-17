@@ -55,7 +55,10 @@
                     @endforeach
 
                     <button type="button" class="btn btn-secondary btn-sm" wire:click="addValue">
-                        + Add Value
+                        <span wire:loading.remove wire:target="addValue">+ Add Value</span>
+                        <span wire:loading wire:target="addValue">
+                            <span class="spinner-border spinner-border-sm me-1"></span> Processing...
+                        </span>
                     </button>
 
                     @error('values.*')
@@ -64,7 +67,7 @@
                 </div>
             </div>
         @endif
-        <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
+        <button type="submit" class="btn btn-primary" wire:loading.attr="disabled" wire:target="createSpecification">
             <span wire:loading.remove wire:target="createSpecification">Submit</span>
             <span wire:loading wire:target="createSpecification">
                 <span class="spinner-border spinner-border-sm me-1"></span> Processing...
