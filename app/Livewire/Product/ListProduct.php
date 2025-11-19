@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Shipping\Rate;
+namespace App\Livewire\Product;
 
 use App\Constants\ApiEndpoints;
 use Illuminate\Support\Facades\Http;
@@ -8,18 +8,19 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-class ListShippingRate extends Component
+class ListProduct extends Component
 {
+    public int $totalProducts = 0;
     public int $page = 1;
-    public array $shippingRates = [];
+    public array $products = [];
     public array $links = [];
 
     public function mount()
     {
-        $this->getShippingRates();
+        $this->getProducts();
     }
 
-    public function getShippingRates()
+    public function getProducts()
     {
         try {
             $headers = [
@@ -27,9 +28,10 @@ class ListShippingRate extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_SHIPPING_RATES, [
-                'page' => $this->page
-            ]);
+            $response = Http::withHeaders($headers)
+                ->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_PRODUCTS, [
+                    'page' => $this->page,
+                ]);
 
             $responseData = $response->json();
 
@@ -38,12 +40,15 @@ class ListShippingRate extends Component
                 return;
             }
 
-            $this->shippingRates = $responseData['data']['data'];
+            $this->products = $responseData['data']['data'];
             $this->links = $responseData['data']['links'];
+            $this->totalProducts = $responseData['data']['total'];
+
         } catch (\Exception $e) {
-            Log::error('Fetch Shipping Rates Error: ' . $e->getMessage());
-            noty()->error("An error occurred while fetching shipping rates. Please try again." . $e->getMessage());
+            Log::error('Fetch Products Error: ' . $e->getMessage());
+            noty()->error("An error occurred while fetching products. Please try again." . $e->getMessage());
         }
+
     }
 
     public function gotoPage($url)
@@ -55,12 +60,12 @@ class ListShippingRate extends Component
 
         $this->page = $queryParams['page'] ?? null;
 
-        $this->getShippingRates();
+        $this->getProducts();
     }
 
     #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.shipping.rate.list-shipping-rate');
+        return view('livewire.product.list-product');
     }
 }

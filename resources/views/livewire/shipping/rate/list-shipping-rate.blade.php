@@ -68,8 +68,7 @@
             <ul class="pagination">
                 @foreach ($links as $link)
                     <li class="page-item {{ $link['active'] ? 'active' : '' }} {{ $link['url'] ? '' : 'disabled' }}">
-                        <a class="page-link" href="{{ $link['url'] ?? '#' }}"
-                            wire:click.prevent="gotoPage('{{ $link['url'] }}')">
+                        <a class="page-link" role="button" wire:click.prevent="gotoPage('{{ $link['url'] }}')">
                             {!! $link['label'] !!}
                         </a>
                     </li>

@@ -12,6 +12,7 @@ class ListShippingZone extends Component
 {
     public int $totalZones = 0;
     public int $activeZones = 0;
+    public int $page = 1;
     public array $shippingZones = [];
     public array $links = [];
 
@@ -29,7 +30,9 @@ class ListShippingZone extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_SHIPPING_ZONES);
+            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_SHIPPING_ZONES, [
+                'page' => $this->page,
+            ]);
 
             $responseData = $response->json();
 
@@ -55,6 +58,18 @@ class ListShippingZone extends Component
     public function createShippingRate(string $id, string $name)
     {
         return redirect()->route('shipping.rate.create', ['shipping-zone-id' => $id, 'shipping-zone' => $name]);
+    }
+
+    public function gotoPage($url)
+    {
+        $parsedUrl = parse_url($url);
+        $query = $parsedUrl['query'] ?? '';
+
+        parse_str($query, $queryParams);
+
+        $this->page = $queryParams['page'] ?? null;
+
+        $this->getShippingZones();
     }
 
     #[Layout('components.layouts.app')]

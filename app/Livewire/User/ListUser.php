@@ -12,6 +12,7 @@ class ListUser extends Component
 {
     public int $totalUsers = 0;
     public int $activeUsers = 0;
+    public int $page = 1;
     public array $users = [];
     public array $links = [];
 
@@ -28,7 +29,9 @@ class ListUser extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_USERS);
+            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_USERS, [
+                'page' => $this->page,
+            ]);
 
             $responseData = $response->json();
 
@@ -40,11 +43,24 @@ class ListUser extends Component
             $this->users = $responseData['data']['data'];
             $this->links = $responseData['data']['links'];
             $this->totalUsers = $responseData['data']['total'];
-            $this->activeUsers=$responseData['data']['total'];
+            $this->activeUsers = $responseData['data']['total'];
+
         } catch (\Exception $e) {
             Log::error('Fetch Store Error: ' . $e->getMessage());
             noty()->error("An error occurred while fetching the stores. Please try again." . $e->getMessage());
         }
+    }
+
+    public function gotoPage($url)
+    {
+        $parsedUrl = parse_url($url);
+        $query = $parsedUrl['query'] ?? '';
+
+        parse_str($query, $queryParams);
+
+        $this->page = $queryParams['page'] ?? null;
+
+        $this->getUsers();
     }
 
     #[Layout('components.layouts.app')]

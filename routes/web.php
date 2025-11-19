@@ -11,6 +11,8 @@ use App\Livewire\Chat\ViewChat;
 use App\Livewire\Dashboard;
 use App\Livewire\Order\ListOrder;
 use App\Livewire\Order\ViewOrder;
+use App\Livewire\Product\ListProduct;
+use App\Livewire\Product\ViewProduct;
 use App\Livewire\Review\ListReview;
 use App\Livewire\Shipping\Method\CreateShippingMethod;
 use App\Livewire\Shipping\Method\ListShippingMethod;
@@ -22,6 +24,7 @@ use App\Livewire\Shipping\Zone\ListShippingZone;
 use App\Livewire\Specification\CreateSpecification;
 use App\Livewire\Specification\EditSpecification;
 use App\Livewire\Store\ListStore;
+use App\Livewire\Story\ListStory;
 use App\Livewire\User\ListUser;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +51,8 @@ Route::group(['middleware' => CheckAuth::class], function () {
 
     //product
     Route::group(['prefix' => "product"], function () {
-        //  Route::get('/', ListProduct::class)->name('product');
+        Route::get('/', ListProduct::class)->name('product');
+        Route::get('{id}', ViewProduct::class)->name('product.view');
     });
 
     //order
@@ -100,5 +104,10 @@ Route::group(['middleware' => CheckAuth::class], function () {
     Route::group(['prefix' => "review"], function () {
         Route::get('/', ListReview::class)->name('review');
         Route::get('{id}', ViewChat::class)->name('chat.view');
+    });
+
+    //story
+    Route::group(['prefix' => "story"], function () {
+        Route::get('/', ListStory::class)->name('story');
     });
 });

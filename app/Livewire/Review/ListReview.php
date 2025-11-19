@@ -12,6 +12,7 @@ class ListReview extends Component
 {
     public int $totalReviews = 0;
     public int $approvedReviews = 0;
+    public int $page = 1;
     public array $reviews = [];
     public array $links = [];
 
@@ -34,7 +35,9 @@ class ListReview extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_REVIEWS);
+            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_REVIEWS, [
+                'page' => $this->page,
+            ]);
 
             $responseData = $response->json();
 
@@ -101,6 +104,18 @@ class ListReview extends Component
             Log::error('Decline Review Error: ' . $e->getMessage());
             noty()->error("An error occurred while declining review. Please try again." . $e->getMessage());
         }
+    }
+
+    public function gotoPage($url)
+    {
+        $parsedUrl = parse_url($url);
+        $query = $parsedUrl['query'] ?? '';
+
+        parse_str($query, $queryParams);
+
+        $this->page = $queryParams['page'] ?? null;
+
+        $this->getReviews();
     }
 
     #[Layout('components.layouts.app')]

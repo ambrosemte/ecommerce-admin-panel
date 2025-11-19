@@ -1,6 +1,6 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold mb-0">Users List</h3>
+        <h3 class="fw-bold mb-0">Products List</h3>
     </div>
 
     <h4 class="text-secondary mb-3">Summary Stats</h4>
@@ -8,52 +8,43 @@
         <div class="col-md-4">
             <div class="card text-bg-primary text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Total Users</h5>
-                    <h3 class="fw-bold">{{ $totalUsers }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card text-bg-success text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Active Users</h5>
-                    <h3 class="fw-bold">{{ $activeUsers }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card text-bg-secondary text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Inactive Users</h5>
-                    <h3 class="fw-bold">{{ $totalUsers - $activeUsers }}</h3>
+                    <h5 class="card-title">Total Product</h5>
+                    <h3 class="fw-bold">{{ $totalProducts }}</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <h4 class="text-secondary mb-3">Users Table</h4>
+    <h4 class="text-secondary mb-3">Products Table</h4>
     <table class="table table-bordered table-hover table-striped align-middle">
         <thead class="table-dark">
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
+                <th>Store</th>
+                <th>Category</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($users as $index => $user)
+            @forelse ($products as $index => $product)
                 <tr>
-                    <td>{{  $index + 1 }}</td>
-                    <td>{{ $user['name'] }}</td>
-                    <td>{{ $user['email'] }}</td>
-                    <td>{{ $user['phone'] }}</td>
+                    <td>{{ $index + 1 }}</td>
+                    <td class="d-flex align-items-center">
+                        {{-- Circular image --}}
+                        <img src="{{ $product['product_variations'][0]['product_media']['featured_media_url'] ?? asset('images/default.png') }}"
+                            alt="{{ $product['name'] }}" class="rounded-circle me-2" width="40" height="40">
+                        {{ $product['name'] }}
+                    </td>
+                    <td>{{ $product['store']['name'] }}</td>
+                    <td>{{ $product['category']['name'] }}</td>
+                    <td>
+                        <a href="{{route('product.view', $product['id'])}}" class="btn btn-primary">View Product</a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="text-center text-muted">No users found.</td>
+                    <td colspan="4" class="text-center text-muted">No products found.</td>
                 </tr>
             @endforelse
         </tbody>
@@ -72,5 +63,4 @@
             </ul>
         </nav>
     </div>
-
 </div>

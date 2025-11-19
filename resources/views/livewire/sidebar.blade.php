@@ -112,6 +112,22 @@
         </a>
     </div>
 
+    <!-- Product Dropdown -->
+    <div @class(["menu-item", "active" => request()->is('product') || request()->is('product/*')])
+        onclick="toggleDropdown('productDropdown')">
+        <i class="las la-box menu-icon"></i>
+        <span>Product</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="productDropdown" class="dropdown">
+        <a href="{{ route('product') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-ul menu-icon"></i>
+                <span>Products List</span>
+            </div>
+        </a>
+    </div>
+
     <!-- Category Dropdown -->
     <div @class(["menu-item", "active" => request()->is('category') || request()->is('category/*')])
         onclick="toggleDropdown('categoryDropdown')">
@@ -166,9 +182,24 @@
         </a>
     </div>
 
+     <!-- Story Dropdown -->
+    <div @class(["menu-item", "active" => request()->is('story') || request()->is('story/*')])
+        onclick="toggleDropdown('storyDropdown')">
+        <i class="las la-dot-circle menu-icon"></i>
+        <span>Story</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="storyDropdown" class="dropdown">
+        <a href="{{ route('story') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-alt menu-icon"></i>
+                <span>Stories List</span>
+            </div>
+        </a>
+    </div>
+
     <!-- Reviews Dropdown -->
-    <div @class(["menu-item", "active" => request()->is('review')])
-        onclick="toggleDropdown('reviewDropdown')">
+    <div @class(["menu-item", "active" => request()->is('review')]) onclick="toggleDropdown('reviewDropdown')">
         <i class="las la-edit menu-icon"></i>
         <span>Review</span>
         <i class="las la-angle-down ms-auto"></i>

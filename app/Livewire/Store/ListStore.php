@@ -12,6 +12,8 @@ class ListStore extends Component
 {
     public int $totalStores = 0;
     public int $activeStores = 0;
+
+    public int $page = 1;
     public array $stores = [];
     public array $links = [];
 
@@ -28,7 +30,9 @@ class ListStore extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_STORES);
+            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_STORES, [
+                'page' => $this->page,
+            ]);
 
             $responseData = $response->json();
 
@@ -46,6 +50,18 @@ class ListStore extends Component
             Log::error('Fetch Store Error: ' . $e->getMessage());
             noty()->error("An error occurred while fetching the stores. Please try again." . $e->getMessage());
         }
+    }
+
+    public function gotoPage($url)
+    {
+        $parsedUrl = parse_url($url);
+        $query = $parsedUrl['query'] ?? '';
+
+        parse_str($query, $queryParams);
+
+        $this->page = $queryParams['page'] ?? null;
+
+        $this->getStores();
     }
 
     #[Layout('components.layouts.app')]

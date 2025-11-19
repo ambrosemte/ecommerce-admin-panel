@@ -13,6 +13,7 @@ class ListOrder extends Component
 
     public int $totalOrders = 0;
     public int $activeOrders = 0;
+    public int $page = 1;
     public array $orders = [];
     public array $links = [];
 
@@ -35,7 +36,9 @@ class ListOrder extends Component
                 "Accept" => "application/json"
             ];
 
-            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_ORDERS);
+            $response = Http::withHeaders($headers)->get(ApiEndpoints::BASE_URL . ApiEndpoints::LIST_ORDERS, [
+                'page' => $this->page
+            ]);
 
             $responseData = $response->json();
 
@@ -46,7 +49,7 @@ class ListOrder extends Component
 
             $this->orders = $responseData['data']['data'];
             $this->links = $responseData['data']['links'];
-            $this->totalOrders=$responseData['data']['total'];
+            $this->totalOrders = $responseData['data']['total'];
         } catch (\Exception $e) {
             Log::error('Fetch Order Error: ' . $e->getMessage());
             noty()->error("An error occurred while fetching orders. Please try again." . $e->getMessage());
@@ -77,6 +80,18 @@ class ListOrder extends Component
             Log::error('Delete Category Error: ' . $e->getMessage());
             noty()->error("An error occurred while deleting the category. Please try again." . $e->getMessage());
         }
+    }
+
+    public function gotoPage($url)
+    {
+        $parsedUrl = parse_url($url);
+        $query = $parsedUrl['query'] ?? '';
+
+        parse_str($query, $queryParams);
+
+        $this->page = $queryParams['page'] ?? null;
+
+        $this->getOrders();
     }
 
     #[Layout('components.layouts.app')]
