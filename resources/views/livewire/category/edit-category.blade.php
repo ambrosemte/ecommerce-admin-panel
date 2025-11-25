@@ -50,7 +50,12 @@
         </div>
         <div class="mb-3">
             @if ($image)
+                <p class="text-muted mb-1">New Image Preview</p>
                 <img src="{{ $image->temporaryUrl() }}" class="w-24 h-24 rounded-lg shadow-md object-cover" width="150">
+
+            @elseif (!empty($existingImage))
+                <p class="text-muted mb-1">Existing Image</p>
+                <img src="{{ $existingImage }}" class="w-24 h-24 rounded-lg shadow-md object-cover" width="150">
             @endif
 
             <div wire:loading wire:target="image" class="mt-2">

@@ -18,6 +18,8 @@ class ApiEndpoints
     const CHECK_AUTH = "/api/v1/user/check-authentication";
     const LIST_USERS = "/api/v1/user/all";
 
+    //DASHBOARD
+    const GET_DASHBOARD = "/api/v1/dashboard/admin";
 
     // STORE
     const LIST_STORES = "/api/v1/store/all";
@@ -86,7 +88,12 @@ class ApiEndpoints
     const APPROVE_REVIEW = "/api/v1/review/approve";
     const DECLINE_REVIEW = "/api/v1/review/decline";
 
-      // STORY
+    // STORY
     const LIST_STORIES = "/api/v1/story/all";
+
+    //PROMO BANNER
+    const LIST_PROMO_BANNER = "/api/v1/promo-banner/all";
+    const VIEW_PROMO_BANNER = "/api/v1/promo-banner";
+    const DELETE_PROMO_BANNER = "/api/v1/promo-banner";
 
 }

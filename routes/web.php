@@ -13,6 +13,9 @@ use App\Livewire\Order\ListOrder;
 use App\Livewire\Order\ViewOrder;
 use App\Livewire\Product\ListProduct;
 use App\Livewire\Product\ViewProduct;
+use App\Livewire\PromoBanner\CreatePromoBanner;
+use App\Livewire\PromoBanner\EditPromoBanner;
+use App\Livewire\PromoBanner\ListPromoBanner;
 use App\Livewire\Review\ListReview;
 use App\Livewire\Shipping\Method\CreateShippingMethod;
 use App\Livewire\Shipping\Method\ListShippingMethod;
@@ -109,5 +112,10 @@ Route::group(['middleware' => CheckAuth::class], function () {
     //story
     Route::group(['prefix' => "story"], function () {
         Route::get('/', ListStory::class)->name('story');
+    });
+
+    //promo banner
+    Route::group(['prefix' => "promo-banner"], function () {
+        Route::get('/', ListPromoBanner::class)->name('promo.banner');
     });
 });

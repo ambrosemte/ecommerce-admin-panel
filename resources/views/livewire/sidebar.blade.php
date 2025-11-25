@@ -198,6 +198,22 @@
         </a>
     </div>
 
+    <!-- Promo Banner Dropdown -->
+    <div @class(["menu-item", "active" => request()->is('promo-banner') || request()->is('promo-banner/*')])
+        onclick="toggleDropdown('promoBannerDropdown')">
+        <i class="las la-bullhorn menu-icon"></i>
+        <span>Promo Banner</span>
+        <i class="las la-angle-down ms-auto"></i>
+    </div>
+    <div id="promoBannerDropdown" class="dropdown">
+        <a href="{{ route('promo.banner') }}" class="text-decoration-none">
+            <div class="menu-item">
+                <i class="las la-list-alt menu-icon"></i>
+                <span>Promo Banner List</span>
+            </div>
+        </a>
+    </div>
+
     <!-- Reviews Dropdown -->
     <div @class(["menu-item", "active" => request()->is('review')]) onclick="toggleDropdown('reviewDropdown')">
         <i class="las la-edit menu-icon"></i>

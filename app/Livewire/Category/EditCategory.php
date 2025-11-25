@@ -17,7 +17,8 @@ class EditCategory extends Component
     public string $description = '';
     public string $imageUrl = '';
     public string $id = '';
-    public int $status ;
+    public string $existingImage = '';
+    public int $status;
     public $image;
     public array $category = [];
 
@@ -48,6 +49,7 @@ class EditCategory extends Component
             $this->description = $responseData['data']['description'] ?? '';
             $this->imageUrl = $responseData['data']['image_url'] ?? '';
             $this->status = $responseData['data']['is_active'];
+            $this->existingImage = $responseData['data']['image_url'] ?? '';
         } catch (\Exception $e) {
             Log::error('Fetch Category Error: ' . $e->getMessage());
             noty()->error("An error occurred while fetching the category. Please try again." . $e->getMessage());
@@ -81,7 +83,7 @@ class EditCategory extends Component
                 $request->attach('image', file_get_contents($this->image->getRealPath()), $this->image->getClientOriginalName());
             }
 
-            $response = $request->post( ApiEndpoints::BASE_URL . ApiEndpoints::EDIT_CATEGORY . "/{$this->id}/update", $payload);
+            $response = $request->post(ApiEndpoints::BASE_URL . ApiEndpoints::EDIT_CATEGORY . "/{$this->id}/update", $payload);
 
             $responseData = $response->json();
 
