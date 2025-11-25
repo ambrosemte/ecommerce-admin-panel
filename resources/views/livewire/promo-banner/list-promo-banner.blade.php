@@ -36,9 +36,6 @@
                     <td>{{ $banner['subtitle'] }}</td>
                     <td>{{ $banner['is_active'] ? '✅' : '❌' }}</td>
                     <td>
-                        <a href="{{ route('promo.banner.edit', ['id' => $banner['id']]) }}" class="btn btn-primary">
-                            Edit
-                        </a>
                         <button class="btn btn-danger" wire:click="delete('{{ $banner['id'] }}')"
                             wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="delete('{{ $banner['id'] }}')">Delete</span>
